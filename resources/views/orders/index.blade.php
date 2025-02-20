@@ -3,7 +3,12 @@
 @section('content')
     <div class="container">
         <h1>Orders List</h1>
-
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -26,11 +31,12 @@
                         <td>
                             <a href="{{ route('orders.show', $order->id) }}" class="btn btn-primary">View</a>
                             @if($order->status !== 'completed')
-                                <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-success">Mark as Completed</button>
-                                </form>
+                            <form action="{{ route('orders.updateStatus', $order->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-success">Mark as Completed</button>
+                            </form>
+                            
                             @endif
                         </td>
                     </tr>

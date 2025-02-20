@@ -15,4 +15,4 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 Route::resource('products', ProductController::class);
 Route::resource('orders', OrderController::class);
-Route::post('orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');

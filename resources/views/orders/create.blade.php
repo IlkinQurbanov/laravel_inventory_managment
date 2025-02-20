@@ -4,6 +4,13 @@
     <div class="container">
         <h1>Create Order</h1>
 
+        <!-- Display Success Message -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <form action="{{ route('orders.store') }}" method="POST">
             @csrf
 
@@ -22,7 +29,7 @@
                 <select name="product_id" id="product_id" class="form-control" required>
                     <option value="">Select a Product</option>
                     @foreach ($products as $product)
-                        <option value="{{ $product->id }}" {{ isset($product) && $product->id == old('product_id', $product->id) ? 'selected' : '' }}>
+                        <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
                             {{ $product->name }} - ${{ $product->price }}
                         </option>
                     @endforeach
@@ -32,19 +39,23 @@
                 @enderror
             </div>
 
-            <!-- Optional: Automatically prefill the selected product if coming from the welcome page -->
-            @isset($product)
-                <input type="hidden" name="product_id" value="{{ $product->id }}">
-            @endisset
-
-            <!-- Status (initially set to 'new') -->
+            <!-- Status -->
             <div class="form-group">
                 <label for="status">Status</label>
                 <select name="status" id="status" class="form-control">
-                    <option value="new" selected>New</option>
-                    <option value="completed">Completed</option>
+                    <option value="new" {{ old('status') == 'new' ? 'selected' : '' }}>New</option>
+                    <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
                 </select>
                 @error('status')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Comment -->
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <textarea name="comment" id="comment" class="form-control">{{ old('comment') }}</textarea>
+                @error('comment')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>

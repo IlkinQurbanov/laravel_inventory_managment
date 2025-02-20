@@ -3,6 +3,12 @@
 @section('content')
     <div class="container">
         <h1>Products</h1>
+               <!-- Success Message -->
+               @if (session('success'))
+               <div class="alert alert-success">
+                   {{ session('success') }}
+               </div>
+           @endif
         <a href="{{ route('products.create') }}" class="btn btn-primary mb-3">Create Product</a>
         <table class="table table-striped">
             <thead>
