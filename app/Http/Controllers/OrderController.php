@@ -47,7 +47,7 @@ class OrderController extends Controller
             'product_id' => 'required|exists:products,id',
             'status' => 'in:new,completed',
             'created_at' => 'required|date',
-            'comment' => 'nullable|string|max:500', // Added comment validation
+            'comment' => 'nullable|string|max:500', 
         ], [
             'customer_name.required' => 'The customer name is required.',
             'customer_name.max' => 'The customer name cannot exceed 255 characters.',
@@ -65,7 +65,7 @@ class OrderController extends Controller
             'product_id' => $request->product_id,
             'status' => $request->status,
             'created_at' => $request->created_at,
-            'comment' => $request->comment, // Store comment if present
+            'comment' => $request->comment, 
         ]);
 
         // Success message after storing the order
