@@ -13,7 +13,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $product->name }}</h5>
-                            <p class="card-text">Price: ${{ $product->price }}</p>
+                            <p class="card-text">
+                                Price: {{ $product->currency->symbol }}{{ number_format($product->price, 2) }}
+                            </p>
                             <p class="card-text">Category: {{ $product->category->name }}</p>
 
                             <a href="{{ route('orders.create', ['product_id' => $product->id]) }}" class="btn btn-primary">Order Now</a>
@@ -24,5 +26,4 @@
         </div>
     </div>
 
-
-    @endsection
+@endsection

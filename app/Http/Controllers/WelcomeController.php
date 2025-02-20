@@ -8,8 +8,9 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->get();
-
+        $products = Product::with(['category', 'currency'])->get();
+    
         return view('welcome', compact('products'));
     }
+    
 }

@@ -40,7 +40,22 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-        
+            <div class="form-group">
+                <label for="currency_id">Currency</label>
+                <select name="currency_id" id="currency_id" class="form-control" required>
+                    <option value="">Select Currency</option>
+                    @foreach ($currencies as $currency)
+                        <option value="{{ $currency->id }}" 
+                                {{ old('currency_id', $product->currency_id ?? '') == $currency->id ? 'selected' : '' }}>
+                            {{ $currency->name }} ({{ $currency->symbol }})
+                        </option>
+                    @endforeach
+                </select>
+                @error('currency_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            
             <!-- Description -->
             <div class="form-group">
                 <label for="description">Description</label>
